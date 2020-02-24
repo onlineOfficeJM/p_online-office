@@ -45,3 +45,12 @@ INSERT INTO user_role (USER_ID, ROLE_ID)
 VALUES (1, 1),
        (1, 2),
        (2, 2);
+
+CREATE TABLE ROOM
+(
+    id          bigint auto_increment,
+    name    varchar(256) not null,
+    PRIMARY KEY (id),
+    UNIQUE KEY (id),
+    UNIQUE KEY (name)
+) DEFAULT CHARSET = utf8;

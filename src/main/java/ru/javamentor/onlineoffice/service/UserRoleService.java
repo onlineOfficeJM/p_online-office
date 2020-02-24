@@ -17,8 +17,8 @@ public class UserRoleService {
         this.repo = repo;
     }
 
-    public void save(UserRole user) {
-        repo.save(user);
+    public void save(UserRole role) {
+        repo.save(role);
     }
 
     public List<UserRole> listAll() {
