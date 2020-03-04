@@ -1,10 +1,12 @@
 package ru.javamentor.onlineoffice.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import ru.javamentor.onlineoffice.entity.ActiveUserStore;
 import ru.javamentor.onlineoffice.entity.User;
 import ru.javamentor.onlineoffice.entity.UserRole;
 import ru.javamentor.onlineoffice.service.UserRoleService;
@@ -15,10 +17,13 @@ import java.util.Set;
 
 @Controller
 public class LoginController {
+
+    private final ActiveUserStore activeUserStore;
     private final UserService userService;
     private final UserRoleService userRoleService;
 
-    public LoginController(UserService userService, UserRoleService userRoleService) {
+    public LoginController(ActiveUserStore activeUserStore, UserService userService, UserRoleService userRoleService) {
+        this.activeUserStore = activeUserStore;
         this.userService = userService;
         this.userRoleService = userRoleService;
     }
@@ -43,5 +48,11 @@ public class LoginController {
     public String registerNewUser(@ModelAttribute("user") User user) {
         userService.save(user);
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/office")
+    public String room(Model model) {
+        model.addAttribute("users", activeUserStore.getUsers());
+        return "office";
     }
 }

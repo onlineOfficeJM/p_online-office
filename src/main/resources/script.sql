@@ -33,7 +33,7 @@ VALUES (1,
 
 INSERT INTO USR (id, username, password)
 VALUES (2,
-        'ivan',
+        'user',
         '$2a$10$VMIRLpPH68ATmRjB/If07uGaEy.YhICowNjpmFvoMkvHmzXYm8Ad2'
         );
 
