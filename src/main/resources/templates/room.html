@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<link rel="styleSheet" th:href="@{/css/style.css}" type="text/css" media="screen">
+</head>
+<body>
+	<div id="container">
+		<div id="wrapper">
+			<div id="join" class="animate join">
+				<h1>Join a Room</h1>
+				<form onsubmit="register(); return false;" accept-charset="UTF-8">
+					<input type="hidden" name="name" th:value="${user.username}" id="name">
+					<p>
+						<select name="room" id="roomName">
+							<option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.name}"></option>
+						</select>
+					</p>
+					<p class="submit">
+						<input type="submit" name="commit" value="Join!">
+					</p>
+				</form>
+			</div>
+			<div id="room" style="display: none;">
+				<h2 id="room-header"></h2>
+				<div id="participants"></div>
+				<input type="button" id="button-leave" onmouseup="leaveRoom();" value="Leave room">
+			</div>
+		</div>
+	</div>
+
+	<script th:src="@{/webjars/webrtc-adapter/release/adapter.js}"></script>
+	<script th:src="@{/js/conferenceroom.js}"></script>
+	<script th:src="@{/js/participant.js}"></script>
+	<script th:src="@{/js/kurento-utils.js}"></script>
+</body>
+</html>
