@@ -15,17 +15,15 @@ import java.util.Set;
 
 @Controller
 public class LoginController {
-    private final UserService userService;
-    private final UserRoleService userRoleService;
-
-    public LoginController(UserService userService, UserRoleService userRoleService) {
-        this.userService = userService;
-        this.userRoleService = userRoleService;
-    }
+	@Autowired
+    private UserService userService;
+	
+	@Autowired
+    private UserRoleService userRoleService;
 
     @GetMapping(value = "/")
-    public String home() {
-        return "home";
+    public String index() {
+        return "index";
     }
 
     @GetMapping(value = "/registration")
