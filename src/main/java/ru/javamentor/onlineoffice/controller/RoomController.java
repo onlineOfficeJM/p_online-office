@@ -11,7 +11,7 @@ import ru.javamentor.onlineoffice.service.RoomService;
 @Controller
 public class RoomController {
 	@Autowired
-	RoomService roomService;
+	private RoomService roomService;
 
 	@GetMapping("/room")
 	public String conference(Authentication authentication, Model model) {
