@@ -33,7 +33,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
             LoggedUser user = new LoggedUser((User)userService.loadUserByUsername(authentication.getName()), activeUserStore);
             session.setAttribute("user", user);
         }
-        response.sendRedirect(request.getContextPath() + "/");
+        response.sendRedirect( "/");
     }
 }
 
