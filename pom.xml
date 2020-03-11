@@ -81,6 +81,13 @@
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 
+		<!--Google Calendar API-->
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-calendar</artifactId>
+			<version>v3-rev224-1.22.0</version>
+		</dependency>
+
 		<!-- Kurento -->
 		<dependency>
 			<groupId>org.kurento</groupId>
