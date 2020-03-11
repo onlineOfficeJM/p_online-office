@@ -28,6 +28,11 @@ public class UserCalendar {
     public UserCalendar() {
     }
 
+    public UserCalendar(String accessToken, String refreshToken) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+    }
+
     public Long getId() {
         return id;
     }

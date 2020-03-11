@@ -90,9 +90,6 @@ public class CalendarService {
 
         TokenResponse response = flow.newTokenRequest(code).setRedirectUri(redirectURI).execute();
 
-        long ms = response.getExpiresInSeconds();
-   //     long sec = calendarApiRepository.findById(1l).getCreatedDate().getSecond();
-
         credential = flow.createAndStoreCredential(response, "userId");
         client = new com.google.api.services.calendar.Calendar.Builder(httpTransport, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME).build();

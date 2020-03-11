@@ -31,7 +31,7 @@ public class CalendarController {
     }
 
     @GetMapping(value = "/login/google", params = "code")
-    public String oauth2Callback(@RequestParam(value = "code") String code, Model model) throws IOException, GeneralSecurityException {
+    public String oauth2Callback(@RequestParam String code, Model model) throws IOException, GeneralSecurityException {
         calendarService.setCode(code);
         model.addAttribute("calendars", calendarService.getCalendarList());
         return "/calendar";
@@ -50,7 +50,7 @@ public class CalendarController {
     }
 
     @PostMapping("/login/google/notifyall")
-    public String notifyAll( @RequestParam(value = "summary") String summary, @RequestParam(value = "description") String description, @RequestParam(value = "startDate") String startDate, @RequestParam(value = "endDate") String endDate, @RequestParam String startTime, @RequestParam String endTime) throws GeneralSecurityException, IOException {
+    public String notifyAll( @RequestParam String summary, @RequestParam(value = "description") String description, @RequestParam(value = "startDate") String startDate, @RequestParam(value = "endDate") String endDate, @RequestParam String startTime, @RequestParam String endTime) throws GeneralSecurityException, IOException {
         DateTime startDateTime = new DateTime(startDate + "T" + startTime + ":00+03:00");
         DateTime endDateTime = new DateTime(endDate + "T" + endTime + ":00+03:00");
         calendarService.notifyAll( summary, description, startDateTime, endDateTime);
