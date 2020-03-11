@@ -1,5 +1,6 @@
 package ru.javamentor.onlineoffice.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,20 +18,18 @@ import java.util.Set;
 
 @Controller
 public class LoginController {
+	@Autowired
+    private UserService userService;
 
-    private final ActiveUserStore activeUserStore;
-    private final UserService userService;
-    private final UserRoleService userRoleService;
+	@Autowired
+    private UserRoleService userRoleService;
 
-    public LoginController(ActiveUserStore activeUserStore, UserService userService, UserRoleService userRoleService) {
-        this.activeUserStore = activeUserStore;
-        this.userService = userService;
-        this.userRoleService = userRoleService;
-    }
+    @Autowired
+    private ActiveUserStore activeUserStore;
 
     @GetMapping(value = "/")
-    public String home() {
-        return "home";
+    public String index() {
+        return "index";
     }
 
     @GetMapping(value = "/registration")
