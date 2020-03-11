@@ -6,16 +6,18 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
+
 	<groupId>ru.javamentor</groupId>
 	<artifactId>onlineoffice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>OnlineOffice</name>
+	<packaging>jar</packaging>
 
-	<properties>
+	<!--properties>
 		<java.version>11</java.version>
-	</properties>
+	</properties-->
 
 	<dependencies>
 		<dependency>
@@ -30,7 +32,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
@@ -75,12 +76,60 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-oauth2-jose</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
 
 		<!--Google Calendar API-->
 		<dependency>
 			<groupId>com.google.apis</groupId>
 			<artifactId>google-api-services-calendar</artifactId>
 			<version>v3-rev224-1.22.0</version>
+		</dependency>
+
+		<!-- Kurento -->
+		<dependency>
+			<groupId>org.kurento</groupId>
+			<artifactId>kurento-client</artifactId>
+			<version>6.13.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kurento</groupId>
+			<artifactId>kurento-utils-js</artifactId>
+			<version>6.13.1</version>
+		</dependency>
+
+		<!-- WebJars -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator</artifactId>
+			<version>0.30</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>demo-console</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>ekko-lightbox</artifactId>
+			<version>5.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>webrtc-adapter</artifactId>
+			<version>7.4.0</version>
 		</dependency>
 	</dependencies>
 

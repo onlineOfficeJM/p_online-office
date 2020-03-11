@@ -25,3 +25,6 @@ hs_err_pid*
 # Idea project files
 .idea/
 target/
+
+# MacOS
+.DS_Store
