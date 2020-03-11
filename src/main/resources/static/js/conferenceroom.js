@@ -15,7 +15,7 @@
  *
  */
 
-var ws = new WebSocket('ws://' + location.host + '/conference');
+var ws = new WebSocket('wss://' + location.host + '/conference');
 var participants = {};
 var name;
 
