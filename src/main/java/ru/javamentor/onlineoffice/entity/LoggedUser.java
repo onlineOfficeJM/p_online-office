@@ -1,19 +1,15 @@
 package ru.javamentor.onlineoffice.entity;
 
-import org.springframework.stereotype.Component;
-
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 import java.util.List;
 
-@Component
 public class LoggedUser implements HttpSessionBindingListener {
-
-    private User user;
+    private String username;
     private ActiveUserStore activeUserStore;
 
-    public LoggedUser(User user, ActiveUserStore activeUserStore) {
-        this.user = user;
+    public LoggedUser(String username, ActiveUserStore activeUserStore) {
+        this.username = username;
         this.activeUserStore = activeUserStore;
     }
 
@@ -21,28 +17,28 @@ public class LoggedUser implements HttpSessionBindingListener {
 
     @Override
     public void valueBound(HttpSessionBindingEvent event) {
-        List<User> users = activeUserStore.getUsers();
+        List<String> users = activeUserStore.getUsers();
         LoggedUser user = (LoggedUser) event.getValue();
-        if (!users.contains(user.getUser())) {
-            users.add(user.getUser());
+        if (!users.contains(user.getUsername())) {
+            users.add(user.getUsername());
         }
     }
 
     @Override
     public void valueUnbound(HttpSessionBindingEvent event) {
-        List<User> users = activeUserStore.getUsers();
+        List<String> users = activeUserStore.getUsers();
         LoggedUser user = (LoggedUser) event.getValue();
-        if (users.contains(user.getUser())) {
-            users.remove(user.getUser());
+        if (users.contains(user.getUsername())) {
+            users.remove(user.getUsername());
         }
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public ActiveUserStore getActiveUserStore() {

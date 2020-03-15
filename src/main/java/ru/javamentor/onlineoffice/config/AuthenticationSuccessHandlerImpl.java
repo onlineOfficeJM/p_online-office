@@ -5,8 +5,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 import ru.javamentor.onlineoffice.entity.ActiveUserStore;
 import ru.javamentor.onlineoffice.entity.LoggedUser;
-import ru.javamentor.onlineoffice.entity.User;
-import ru.javamentor.onlineoffice.service.UserService;
+import ru.javamentor.onlineoffice.events.ActiveUserStoreUpdateEventPublisher;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,13 +14,12 @@ import java.io.IOException;
 
 @Component
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
-
     private final ActiveUserStore activeUserStore;
-    private final UserService userService;
+    private final ActiveUserStoreUpdateEventPublisher publisher;
 
-    public AuthenticationSuccessHandlerImpl(ActiveUserStore activeUserStore, UserService userService) {
+    public AuthenticationSuccessHandlerImpl(ActiveUserStore activeUserStore, ActiveUserStoreUpdateEventPublisher publisher) {
         this.activeUserStore = activeUserStore;
-        this.userService = userService;
+        this.publisher = publisher;
     }
 
     @Override
@@ -30,10 +28,12 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
             throws IOException {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            LoggedUser user = new LoggedUser((User)userService.loadUserByUsername(authentication.getName()), activeUserStore);
+            LoggedUser user = new LoggedUser(authentication.getName(), activeUserStore);
             session.setAttribute("user", user);
+            publisher.publishUpdateEvent("User " + user.getUsername() + " logged in");
         }
-        response.sendRedirect( "/");
+
+        response.sendRedirect("/");
     }
 }
 

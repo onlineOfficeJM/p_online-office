@@ -1,21 +1,24 @@
 package ru.javamentor.onlineoffice.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ActiveUserStore {
 
-    private List<User> users;
+    private List<String> users;
 
     public ActiveUserStore() {
         users = new ArrayList<>();
     }
 
-    public List<User> getUsers() {
+    public List<String> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<String> users) {
         this.users = users;
     }
 }

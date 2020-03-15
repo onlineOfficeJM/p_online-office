@@ -4,16 +4,16 @@ import org.kurento.client.KurentoClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import ru.javamentor.onlineoffice.kurento.CallHandler;
 import ru.javamentor.onlineoffice.kurento.ConferenceManager;
 import ru.javamentor.onlineoffice.kurento.UserRegistry;
-import org.springframework.context.annotation.Bean;
-import ru.javamentor.onlineoffice.entity.ActiveUserStore;
 
 @EnableWebSocket
+@EnableAsync
 @SpringBootApplication
 public class OnlineOfficeApplication implements WebSocketConfigurer {
 	@Bean
@@ -43,9 +43,5 @@ public class OnlineOfficeApplication implements WebSocketConfigurer {
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(groupCallHandler(), "/conference");
-	}
-	@Bean
-	public ActiveUserStore activeUserStore(){
-		return new ActiveUserStore();
 	}
 }

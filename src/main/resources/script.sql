@@ -54,3 +54,7 @@ CREATE TABLE ROOM
     UNIQUE KEY (id),
     UNIQUE KEY (name)
 ) DEFAULT CHARSET = utf8;
+
+INSERT INTO ROOM (ID, NAME)
+VALUES (1, 'ROOM_1'),
+       (2, 'ROOM_2');

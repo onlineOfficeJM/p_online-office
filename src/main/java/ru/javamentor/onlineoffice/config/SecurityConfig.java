@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 
 @Configuration
@@ -19,10 +20,13 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final LogoutSuccessHandler logoutSuccessHandler;
 
-    public SecurityConfig(@Qualifier("userService") UserDetailsService userDetailsService, AuthenticationSuccessHandler authenticationSuccessHandler) {
+    public SecurityConfig(@Qualifier("userService") UserDetailsService userDetailsService, AuthenticationSuccessHandler
+            authenticationSuccessHandler, LogoutSuccessHandler logoutSuccessHandler) {
         this.userDetailsService = userDetailsService;
         this.authenticationSuccessHandler = authenticationSuccessHandler;
+        this.logoutSuccessHandler = logoutSuccessHandler;
     }
 
     @Bean
@@ -38,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin().successHandler(authenticationSuccessHandler).permitAll()
                 .and()
-                    .logout().permitAll()
+                    .logout().logoutSuccessHandler(logoutSuccessHandler).permitAll()
                 .and()
                     .httpBasic();
     }
@@ -46,6 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/registration");
+        web.ignoring().antMatchers("/api/users/activeUserList");
+        web.ignoring().antMatchers("/api/users/userlist");
     }
 
     @Override

@@ -24,9 +24,6 @@ public class LoginController {
 	@Autowired
     private UserRoleService userRoleService;
 
-    @Autowired
-    private ActiveUserStore activeUserStore;
-
     @GetMapping(value = "/")
     public String index() {
         return "index";
@@ -50,8 +47,7 @@ public class LoginController {
     }
 
     @GetMapping(value = "/office")
-    public String room(Model model) {
-        model.addAttribute("users", activeUserStore.getUsers());
+    public String office() {
         return "office";
     }
 }
