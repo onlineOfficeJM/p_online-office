@@ -33,7 +33,7 @@ VALUES (1,
 
 INSERT INTO USR (id, username, password)
 VALUES (2,
-        'ivan',
+        'user',
         '$2a$10$VMIRLpPH68ATmRjB/If07uGaEy.YhICowNjpmFvoMkvHmzXYm8Ad2'
         );
 
@@ -54,3 +54,7 @@ CREATE TABLE ROOM
     UNIQUE KEY (id),
     UNIQUE KEY (name)
 ) DEFAULT CHARSET = utf8;
+
+INSERT INTO ROOM (ID, NAME)
+VALUES (1, 'ROOM_1'),
+       (2, 'ROOM_2');

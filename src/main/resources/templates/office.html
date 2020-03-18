@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Room</title>
+</head>
+<body>
+<div class="container">
+
+    <div class="row" style="height: 360px">
+        <div class="col-md-5 border">
+            <h3>ROOM #1</h3>
+        </div>
+        <div class="col-md-5 border">
+            <h3>ROOM #2</h3>
+        </div>
+    </div>
+
+    <div class="row" style="height: 360px">
+        <div class="col-md-5 border">
+            <h3>ROOM #3</h3>
+        </div>
+        <div class="col-md-5 border">
+            <h3>ROOM #4</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <h5 class="col-2">Users online:</h5>
+        <p class="col-2" id="userlist">UserList</p>
+    </div>
+
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+</script>
+<script>
+    $(function () {
+        const userlistElement = document.getElementById("userlist");
+        $.getJSON('/api/users/userlist', function (users) {
+            userlistElement.textContent = users;
+        });
+    });
+
+    const eventSource = new EventSource("/api/users/activeUserList");
+    const userlist = document.getElementById("userlist");
+
+    eventSource.onerror = function () {
+        userlist.textContent = 'sse connection closed';
+    };
+
+    eventSource.onmessage = function (evt) {
+        userlist.textContent = JSON.parse(evt.data);
+    };
+</script>
+</body>
+</html>
